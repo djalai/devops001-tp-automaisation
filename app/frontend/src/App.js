@@ -6,14 +6,14 @@ function App() {
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/`)
-            .then(response => setData(response.data.message))
+            .then(response => setData(response.data))
             .catch(error => console.error('Error:', error));
     }, []);
 
     return (
         <div>
             <h1>Application React avec Backend Python</h1>
-            <p>{data}</p>
+            <p>{JSON.stringify(data)}</p>
         </div>
     );
 }
