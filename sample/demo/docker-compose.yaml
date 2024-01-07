@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  frontend:
+    image: app-frontend:main
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./.env:/app/.env
+    environment:
+      - NODE_ENV=production
+
+  backend:
+    image: app-backend:main
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://u01:kieh5Atae2xe5Kei@db:5432/yolo
+    depends_on:
+      - db
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:23.2
+    ports:
+      - "8978:8978"
+    volumes:
+      - cloudbeaver:/opt/cloudbeaver/workspace
+
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: u01
+      POSTGRES_PASSWORD: kieh5Atae2xe5Kei
+      POSTGRES_DB: yolo
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  cloudbeaver:
