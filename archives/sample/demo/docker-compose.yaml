@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   frontend:
-    image: app-frontend:stage2
+    image: app-frontend:main
     ports:
       - "3000:3000"
     volumes:
@@ -10,11 +10,10 @@ services:
       - NODE_ENV=production
 
   backend:
-    image: app-backend:stage2
+    image: app-backend:main
     ports:
       - "5000:5000"
     environment:
-      - LISTEN_PORT=5000
       - DATABASE_URL=postgresql://u01:kieh5Atae2xe5Kei@db:5432/yolo
     depends_on:
       - db
